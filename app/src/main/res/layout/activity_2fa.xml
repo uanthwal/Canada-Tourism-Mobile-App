@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:background="@drawable/authbackground2"
+    android:background="@drawable/authbackground4"
     android:layout_marginTop="70dp"
     tools:context=".TwoFactorAuthActivity">
 
@@ -16,6 +16,5 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-
         />
 </LinearLayout>

@@ -24,12 +24,12 @@
         android:textStyle="bold"
         />
     <EditText
+        android:id="@+id/et_otp"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
         android:textColor="@color/colorWhite"
-        android:background="#11000000"
+        android:layout_marginTop="40dp"
         />
     <Button
         android:id="@+id/btn_verify"

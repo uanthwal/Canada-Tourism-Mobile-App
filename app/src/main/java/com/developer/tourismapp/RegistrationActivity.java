@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +18,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class RegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -127,20 +138,54 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
             return;
         }
 
+        doRegister(name, email, password, dob,gender);
 
-//        btnRegister.setEnabled(false);
-//        final ProgressDialog progressDialog = new ProgressDialog(RegistrationActivity.this, R.style.AppTheme_Dark_Dialog);
-//        progressDialog.setIndeterminate(true);
-//        progressDialog.setMessage("Creating Account...");
-//        progressDialog.show();
-//        btnRegister.setEnabled(true);
+    }
 
-        Intent intent = new Intent(RegistrationActivity.this, TwoFactorAuthActivity.class );
-        intent.putExtra("name", name);
-        intent.putExtra("email",email);
-        intent.putExtra("password", password);
-        intent.putExtra("dob", dob);
-        startActivity(intent);
+    private void doRegister(String name, final String email, String password, String dob, String gender) {
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("username", name);
+        params.put("email", email);
+        params.put("dob",dob);
+        params.put("gender",gender);
+        params.put("password",password);
+        String url = "https://cloud-5409.herokuapp.com/register";
+        JSONObject parameters = new JSONObject(params);
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, parameters, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //TODO: handle success
+                String rc="", message="";
+                try {
+                    rc = response.getString("code");
+                    message = response.getString("message");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (rc.equals("200"))
+                {
+                    Toast.makeText(RegistrationActivity.this, "Registration Successful! ", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "onResponse: "+ "Registration Success.");
+                    Intent intent = new Intent(RegistrationActivity.this, TwoFactorAuthActivity.class);
+                    intent.putExtra("email", email);
+                    startActivity(intent);
+                }
+                else{
+                    Log.d(TAG, "onResponse: Registration Server failure: "+ message);
+                    Toast.makeText(RegistrationActivity.this, "Server Message: "+message, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                //TODO: handle failure
+                Log.e(TAG, "errorResponse:" , error);
+                Toast.makeText(RegistrationActivity.this, "Registration Failed! Try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
+        Volley.newRequestQueue(this).add(jsonRequest);
     }
 
     @Override

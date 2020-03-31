@@ -19,11 +19,10 @@ public class MainActivity extends AppCompatActivity {
         bookTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, BookTicket.class));
+                startActivity(new Intent(MainActivity.this, SearchPlaces.class));
             }
         });
     }
-
 
     /**
      * Handles event when one preses back button.

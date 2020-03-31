@@ -1,4 +1,4 @@
-package com.developer.tourismapp.ui.login;
+package com.developer.tourismapp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,8 +13,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.developer.tourismapp.R;
-import com.developer.tourismapp.RegistrationActivity;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -67,7 +76,52 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void signIn(String email, String password) {
+
         Log.d(TAG, "signIn:" + email);
+        makeLoginRequest(email, password);
+    }
+
+    private void makeLoginRequest(final String email, String password) {
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("email", email);
+        params.put("password", password);
+        String url = "https://cloud-5409.herokuapp.com/login";
+        JSONObject parameters = new JSONObject(params);
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, parameters, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //TODO: handle success
+                String rc="", message="";
+                try {
+                    rc=response.getString("code");
+                    message = response.getString("message");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (rc.equals("200"))
+                {
+                    Toast.makeText(LoginActivity.this, "Transferring to Authentication Screen..", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "onResponse: "+ "Login Success.");
+                    Intent intent = new Intent(LoginActivity.this, TwoFactorAuthActivity.class);
+                    intent.putExtra("email", email);
+                    startActivity(intent);
+                }
+                else{
+                    Log.d(TAG, "onResponse: Server failure "+ message);
+                    Toast.makeText(LoginActivity.this, "Server Message: "+message, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                //TODO: handle failure
+                Log.e(TAG, "errorResponse:" , error);
+                Toast.makeText(LoginActivity.this, "Login Failed! Try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
+        Volley.newRequestQueue(this).add(jsonRequest);
     }
 
     @Override
