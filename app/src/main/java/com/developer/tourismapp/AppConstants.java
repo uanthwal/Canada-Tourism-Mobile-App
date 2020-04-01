@@ -8,5 +8,4 @@ public class AppConstants {
     public static String GET_HOTSPOTS = BASE_URL + "/get-hotspots";
     public static String SEARCH = BASE_URL + "/api/search";
     public static String S3_BASE_URL = "https://tourismapp14.s3.amazonaws.com/";
-
 }
