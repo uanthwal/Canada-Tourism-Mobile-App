@@ -2,8 +2,6 @@ package com.developer.tourismapp;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,10 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,7 +22,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Calendar;
 import java.util.HashMap;
 
 public class RegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -131,7 +125,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
                     Toast.makeText(RegistrationActivity.this, "Registration Successful! ", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "onResponse: "+ "Registration Success.");
                     Intent intent = new Intent(RegistrationActivity.this, TwoFactorAuthActivity.class);
-                    intent.putExtra("email", email);
+                    AppGlobalVars.EMAIL_ID = email;
                     startActivity(intent);
                 }
                 else{

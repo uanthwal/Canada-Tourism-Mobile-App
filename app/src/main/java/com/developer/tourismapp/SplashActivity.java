@@ -10,40 +10,35 @@ import java.util.TimerTask;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static int SPLASH_TIME_OUT = 80;      //loading timeout for progressbar
+    private static int SPLASH_TIME_OUT = 80;
     ProgressBar progressBar;
-    private int i=0;
+    private int i = 0;
     private Timer timer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try
-        {
+        try {
             this.getSupportActionBar().hide();
+        } catch (NullPointerException e) {
         }
-        catch (NullPointerException e){}
 
         setContentView(R.layout.activity_splash);
         progressBar = findViewById(R.id.progressbar_splash);
         progressBar.setProgress(0);
-        //Progressbar loading timer
-        timer=new Timer();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if(i<SPLASH_TIME_OUT)
-                {
+                if (i < SPLASH_TIME_OUT) {
                     progressBar.setProgress(i);
-                    i+=1.5;
-                }
-                else
-                {
+                    i += 1.5;
+                } else {
                     timer.cancel();
                     finish();
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                    startActivity(new Intent(SplashActivity.this, SearchPlaces.class));
                 }
             }
-        },0,SPLASH_TIME_OUT);
-
+        }, 0, SPLASH_TIME_OUT);
     }
 }

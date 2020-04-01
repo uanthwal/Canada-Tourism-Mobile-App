@@ -12,10 +12,9 @@ public class BookTicketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_ticket);
         Intent intent = getIntent();
-        String sessionid = intent.getStringExtra("sessionid");
-        sessionid = "a9a88c70-5ef7-11ea-8c94-87cc4236f614";
-        String destination = intent.getStringExtra("destination");
-        destination ="the border";
+        String sessionid = AppGlobalVars.SESSION_ID;
+//        sessionid = "a9a88c70-5ef7-11ea-8c94-87cc4236f614";
+        String destination =AppGlobalVars.SEARCH_PLACE_ID;
         Toast.makeText(BookTicketActivity.this, "Session id:"+sessionid+" Destination:"+destination,Toast.LENGTH_LONG).show();
     }
 }

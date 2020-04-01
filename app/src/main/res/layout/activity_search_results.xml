@@ -6,17 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".SearchResults">
 
-    <Button
-        android:id="@+id/btn_book"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/login_button_shape"
-        android:text="Book"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="341dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:textSize="20dp"
+        android:text="Search Results">
+        </TextView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/search_results_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"/>
+
+    </RelativeLayout>
+<!--    <Button-->
+<!--        android:id="@+id/btn_book"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:background="@drawable/login_button_shape"-->
+<!--        android:text="Book"-->
+<!--        android:textColor="#ffffff"-->
+<!--        android:textSize="18sp"-->
+<!--        tools:ignore="MissingConstraints"-->
+<!--        tools:layout_editor_absoluteX="161dp"-->
+<!--        tools:layout_editor_absoluteY="341dp" />-->
 
 </android.support.constraint.ConstraintLayout>

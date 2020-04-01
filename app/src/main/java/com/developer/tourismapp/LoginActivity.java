@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(LoginActivity.this, "Transferring to Authentication Screen..", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "onResponse: "+ "Login Success.");
                     Intent intent = new Intent(LoginActivity.this, TwoFactorAuthActivity.class);
-                    intent.putExtra("email", email);
+                    AppGlobalVars.EMAIL_ID = email;
                     startActivity(intent);
                 }
                 else{

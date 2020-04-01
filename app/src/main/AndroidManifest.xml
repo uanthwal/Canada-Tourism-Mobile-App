@@ -10,23 +10,37 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".BookTicketActivity"></activity>
-        <activity android:name=".SearchResults" />
-        <activity android:name=".SearchPlaces">
+        <activity android:name=".SearchResults" >
+
+        </activity>
+        <activity android:name=".LoginActivity">
 
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".TwoFactorAuthActivity" />
         <activity android:name=".RegistrationActivity" />
+<!--        <activity-->
+<!--            android:name=".LoginActivity"-->
+<!--            android:label="@string/title_activity_login" >-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+
         <activity
-            android:name=".LoginActivity"
+            android:name=".SearchPlaces"
             android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashActivity" />
+
+        <activity android:name=".SplashActivity" >
+
+        </activity>
 
         <uses-library
             android:name="org.apache.http.legacy"

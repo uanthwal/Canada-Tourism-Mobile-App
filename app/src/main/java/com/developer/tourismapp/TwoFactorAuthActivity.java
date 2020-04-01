@@ -35,24 +35,13 @@ public class TwoFactorAuthActivity extends AppCompatActivity {
         tvEmail = findViewById(R.id.tv_email);
         btnverify =findViewById(R.id.btn_verify);
         etOTP = findViewById(R.id.et_otp);
-        Bundle extras = getIntent().getExtras();
-        String email="";
-        if (extras != null) {
-            email = extras.getString("email");
-            tvEmail.setText(email);
-        }
-        else{
-            Toast.makeText(TwoFactorAuthActivity.this,
-                    "No email configured!",
-                    Toast.LENGTH_SHORT).show();
-        }
+        tvEmail.setText(AppGlobalVars.EMAIL_ID);
 
         btnverify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!etOTP.getText().toString().equals(""))
                 validateOTP(tvEmail.getText().toString(), etOTP.getText().toString());
-
             }
         });
     }
@@ -78,8 +67,8 @@ public class TwoFactorAuthActivity extends AppCompatActivity {
                 if (rc.equals("200"))
                 {
                     Log.d(TAG, "onResponse: "+ "Auth Success.");
-                    Intent intent = new Intent(TwoFactorAuthActivity.this, SearchPlaces.class);
-                    intent.putExtra("sessionid", sessionid);
+                    Intent intent = new Intent(TwoFactorAuthActivity.this, BookTicketActivity.class);
+                    AppGlobalVars.SESSION_ID = sessionid;
                     startActivity(intent);
                 }
                 else{
