@@ -59,9 +59,6 @@ public class CardDetails extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             booking_id = jsonObject.getString("booking_id");
-                            //myModel m = new myModel(jo.getString("mode_company"), jo.getString("mode"), jo.getString("mode_number"),jo.getString("mode_fare"));
-                            //mList.add(m);
-                            //booking_id = jo.getString("booking_id");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -72,7 +69,6 @@ public class CardDetails extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
-
                         Log.d("Error.Response", "Errorrrrrrrrrrrrrrrrrrrrrrrr");
                     }
                 }
@@ -89,6 +85,7 @@ public class CardDetails extends AppCompatActivity {
                 params.put("mode_number", mode_number);
                 params.put("mode_id", mode_id);
                 params.put("date_of_travel", travel_date);
+                params.put("email_id", AppGlobalVars.EMAIL_ID);
                 return params;
             }
         };

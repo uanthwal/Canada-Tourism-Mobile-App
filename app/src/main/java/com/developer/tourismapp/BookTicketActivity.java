@@ -70,7 +70,6 @@ public class BookTicketActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 month = month + 1;
-                //Log.d(TAG, "onDateSet : mm/dd/yyyy : "+ month + "/" + day + "/"+ year );
                 date = month + "/" + day + "/" + year;
                 mDisplayDate.setText(date);
             }
@@ -83,10 +82,6 @@ public class BookTicketActivity extends AppCompatActivity {
         String destination = Destination.getText().toString();
         Intent intent = new Intent(BookTicketActivity.this, TravelMode.class);
         AppGlobalVars.SOURCE = source;
-//        intent.putExtra("SOURCE", source);
-//        intent.putExtra( "DESTINATION", AppGlobalVars.SEARCH_PLACE_ID);
-//        intent.putExtra("DESTINATION","AULA");
-//        intent.putExtra("TRAVELDATE", date);
         AppGlobalVars.TRAVEL_DATE = date;
         startActivity(intent);
     }
