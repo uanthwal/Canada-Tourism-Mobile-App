@@ -35,6 +35,8 @@ public class CardDetails extends AppCompatActivity {
         TextView txtDes = (TextView) findViewById(R.id.payment_amount);
         Button btnpay = (Button) findViewById(R.id.btn_pay);
         final Intent intent = getIntent();
+
+        final String pass_name = AppGlobalVars.USER_NAME;
         final String travel_name = intent.getStringExtra("TRAVEL_NAME");
         final String travel_mode = intent.getStringExtra("TRAVEL_MODE");
         final String mode_number = intent.getStringExtra("MODE_NUMBER");
@@ -47,7 +49,6 @@ public class CardDetails extends AppCompatActivity {
         String tPrice = "$" + price_travel;
         txtDes.setText(tPrice);
         btnpay.setText(String.format("Make Payment %s", txtDes.getText()));
-
 
         RequestQueue queue = Volley.newRequestQueue(this);
         final String url = AppConstants.BOOK_TICKET;
@@ -76,7 +77,7 @@ public class CardDetails extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("username", travel_name);
+                params.put("username", pass_name);
                 params.put("src", source);
                 params.put("dest", destination);
                 params.put("mode", travel_mode);

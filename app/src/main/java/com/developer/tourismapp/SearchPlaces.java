@@ -60,7 +60,6 @@ public class SearchPlaces extends AppCompatActivity {
             }
         });
         getTrendingPlaces();
-
     }
 
     private void getTrendingPlaces() {

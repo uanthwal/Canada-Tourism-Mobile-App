@@ -4,13 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TravelMode"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".TravelMode">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Travel Options"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="28dp">
+
+    </TextView>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/myrecycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/myrecycle">
+        android:layout_marginTop="10dp">
 
     </android.support.v7.widget.RecyclerView>
 

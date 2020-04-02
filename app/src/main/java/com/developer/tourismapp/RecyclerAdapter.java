@@ -39,7 +39,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.TextVi
         viewHolder.travel_name.setText(list.get(i).travel_name);
         viewHolder.travel_mode.setText(list.get(i).travel_mode);
         viewHolder.mode_number.setText(list.get(i).mode_number);
-        viewHolder.price_travel.setText(list.get(i).price_travel);
+        viewHolder.price_travel.setText("$" + list.get(i).price_travel);
         viewHolder.btnBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,65 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="100dp"
-    tools:context=".BookTicketActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".BookTicketActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Book Ticket"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/colorBlack"
+        android:textSize="25dp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
-        >
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="0.5"
             android:text="Source"
-            android:layout_weight="0.4"/>
+            android:textColor="@color/colorBlack"
+            android:textSize="20dp" />
+
         <Spinner
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:id="@+id/spinner"
-            android:layout_weight="1"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textSize="20dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="0.5"
             android:text="Destination"
-            android:layout_weight="0.2"
-            />
+            android:textColor="@color/colorBlack"
+            android:textSize="20dp" />
 
 
         <TextView
             android:id="@+id/dest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="0.5"
             android:text="Name"
-            android:layout_weight="1"/>
+            android:textColor="@color/colorBlack"
+            android:textSize="20dp" />
     </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Select Date"
         android:id="@+id/pickDate"
-        android:textSize="30sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"
-        />
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:hint="Select Date"
+        android:textColor="@color/colorBlack"
+        android:textSize="30sp" />
+
+    <Button
         android:id="@+id/bookTicketNow"
-        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
         android:text="Search"
-        />
+        android:textSize="20sp" />
 
 </LinearLayout>

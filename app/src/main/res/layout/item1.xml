@@ -5,28 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
+    android:padding="10dp"
     tools:context=".TravelMode"
     android:orientation="vertical">
 
     <TextView
+        android:textSize="20dp"
+        android:textColor="@color/colorBlack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="travel_name"
         android:id="@+id/travelName"
         />
     <TextView
+        android:textSize="20dp"
+        android:textColor="@color/colorBlack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="mode"
         android:id="@+id/mode"
         />
     <TextView
+        android:textSize="20dp"
+        android:textColor="@color/colorBlack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="modeNumber"
         android:id="@+id/modeNumber"
         />
     <TextView
+        android:textSize="20dp"
+        android:textColor="@color/colorBlack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="price"
@@ -38,4 +47,10 @@
         android:text="Book"
         android:id="@+id/bookNow"
         android:layout_gravity="center"/>
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/lv_r_l_2"
+        android:background="#000" />
 </LinearLayout>

@@ -1,43 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_auth_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:text="A code has been sent to the given Email ID. Please verify."
-        android:textColor="@color/colorWhite"
-        />
+        android:layout_marginTop="150dp"
+        android:text="Please enter the OTP sent to your registered mail address."
+        android:textColor="@color/colorWhite" />
+
     <TextView
         android:id="@+id/tv_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:textSize="20dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
         android:text="EMAIL@DOMAIN.COM"
         android:textColor="@color/colorWhite"
+        android:textSize="20dp"
         android:textStyle="bold"
-        />
+        android:visibility="gone" />
+
     <EditText
         android:id="@+id/et_otp"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/colorWhite"
         android:layout_marginTop="40dp"
-        />
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite" />
+
     <Button
         android:id="@+id/btn_verify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/login_button_shape"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:textColor="@color/colorWhite"
-        android:text="VERIFY"/>
+        android:background="@drawable/login_button_shape"
+        android:text="VERIFY"
+        android:textColor="@color/colorWhite" />
 </LinearLayout>
