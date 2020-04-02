@@ -42,10 +42,10 @@ public class TrendingPlacesListAdapter extends RecyclerView.Adapter<TrendingPlac
 
         public MyViewHolder(View v) {
             super(v);
-            placeName = v.findViewById(R.id.place_name);
-            placeDesc = v.findViewById(R.id.place_desc);
-            placeImage = v.findViewById(R.id.place_img);
-            bookButton = v.findViewById(R.id.book_btn);
+            placeName = v.findViewById(R.id.place_name_t);
+            placeDesc = v.findViewById(R.id.place_desc_t);
+            placeImage = v.findViewById(R.id.place_img_t);
+            bookButton = v.findViewById(R.id.book_btn_t);
         }
     }
 
@@ -62,11 +62,14 @@ public class TrendingPlacesListAdapter extends RecyclerView.Adapter<TrendingPlac
                                                                      int viewType) {
         // create a new view
         View v = (View) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item, parent, false);
+                .inflate(R.layout.trending_list_item, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }
 
+    public float convertDpToPx(Context context, float dp) {
+        return dp * context.getResources().getDisplayMetrics().density;
+    }
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
@@ -75,6 +78,8 @@ public class TrendingPlacesListAdapter extends RecyclerView.Adapter<TrendingPlac
         if (null != mDataset && mDataset.size() > 0) {
             holder.placeName.setText(mDataset.get(position).placeName);
             holder.placeDesc.setText(mDataset.get(position).placeDesc);
+            holder.placeImage.getLayoutParams().height =(int) convertDpToPx(mContext,68);
+            holder.placeImage.getLayoutParams().width =(int) convertDpToPx(mContext,76);
             Picasso.get().load(mDataset.get(position).imgURL).into(holder.placeImage);
         }
         holder.bookButton.setOnClickListener(new View.OnClickListener() {

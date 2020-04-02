@@ -54,7 +54,7 @@ public class SearchPlaces extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        mAdapter = new TrendingPlacesListAdapter(getApplicationContext(),trendingPlaces, new TrendingPlacesListAdapter.OnItemClickListener() {
+        mAdapter = new TrendingPlacesListAdapter(getApplicationContext(), trendingPlaces, new TrendingPlacesListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
             }

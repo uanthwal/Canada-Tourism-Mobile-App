@@ -61,6 +61,9 @@ public class TwoFactorAuthActivity extends AppCompatActivity {
                     rc = response.getString("code");
                     sessionid = response.getString("session_id");
                     message = response.getString("message");
+                    JSONObject jsonObject= response.getJSONObject("data");
+                    AppGlobalVars.USER_NAME = jsonObject.getString("username");
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

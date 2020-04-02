@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
 
-public class SearchPlaceListAdapter extends RecyclerView.Adapter<SearchPlaceListAdapter.MyViewHolder1> {
+public class ResultPlaceListAdapter extends RecyclerView.Adapter<ResultPlaceListAdapter.MyViewHolder1> {
     private ArrayList<PlacesTO> mDataset;
     private Context mContext;
     private OnItemClickListener mOnItemClickListener;
@@ -46,7 +46,7 @@ public class SearchPlaceListAdapter extends RecyclerView.Adapter<SearchPlaceList
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public SearchPlaceListAdapter(Context mContext,ArrayList<PlacesTO> myDataset, OnItemClickListener onItemClickListener) {
+    public ResultPlaceListAdapter(Context mContext, ArrayList<PlacesTO> myDataset, OnItemClickListener onItemClickListener) {
         this.mContext =mContext;
         mDataset = myDataset;
         mOnItemClickListener = onItemClickListener;

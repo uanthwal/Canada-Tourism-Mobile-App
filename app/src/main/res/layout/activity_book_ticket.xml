@@ -1,9 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookTicketActivity">
+    android:paddingTop="100dp"
+    tools:context=".BookTicketActivity"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Source"
+            android:layout_weight="0.4"/>
+        <Spinner
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/spinner"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Destination"
+            android:layout_weight="0.2"
+            />
+
+
+        <TextView
+            android:id="@+id/dest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Select Date"
+        android:id="@+id/pickDate"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bookTicketNow"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:text="Search"
+        />
+
+</LinearLayout>

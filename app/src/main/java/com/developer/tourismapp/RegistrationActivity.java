@@ -101,7 +101,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
 
     }
 
-    private void doRegister(String name, final String email, String password, String contact) {
+    private void doRegister(final String name, final String email, String password, String contact) {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("username", name);
         params.put("email", email);
@@ -122,6 +122,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
                 }
                 if (rc.equals("200"))
                 {
+                    AppGlobalVars.USER_NAME = name;
                     Toast.makeText(RegistrationActivity.this, "Registration Successful! ", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "onResponse: "+ "Registration Success.");
                     Intent intent = new Intent(RegistrationActivity.this, TwoFactorAuthActivity.class);

@@ -43,7 +43,7 @@ public class SearchResults extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new SearchPlaceListAdapter(getApplicationContext(),searchResultPlaces, new SearchPlaceListAdapter.OnItemClickListener() {
+        mAdapter = new ResultPlaceListAdapter(getApplicationContext(),searchResultPlaces, new ResultPlaceListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
             }
