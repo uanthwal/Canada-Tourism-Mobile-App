@@ -28,6 +28,7 @@ public class SearchResults extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     Button book;
     ArrayList<PlacesTO> searchResultPlaces = new ArrayList<PlacesTO>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class SearchResults extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new ResultPlaceListAdapter(getApplicationContext(),searchResultPlaces, new ResultPlaceListAdapter.OnItemClickListener() {
+        mAdapter = new ResultPlaceListAdapter(getApplicationContext(), searchResultPlaces, new ResultPlaceListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
             }
@@ -52,40 +53,40 @@ public class SearchResults extends AppCompatActivity {
     }
 
     private void getSearchResults() {
-            HashMap<String, String> params = new HashMap<String, String>();
-            params.put("search_text",AppGlobalVars.SEARCH_TEXT);
-            params.put("session_id", AppGlobalVars.SESSION_ID);
-            String url = AppConstants.SEARCH;
-            JSONObject parameters = new JSONObject(params);
-            JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, parameters, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        JSONArray jsonArray = response.getJSONArray("data");
-                        if (null != jsonArray && jsonArray.length() > 0) {
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                PlacesTO placesTO = new PlacesTO();
-                                placesTO.setPlaceName(jsonObject.get("place_name").toString());
-                                placesTO.setPlaceId(jsonObject.get("place_id").toString());
-                                placesTO.setPlaceDesc(jsonObject.get("desc").toString());
-                                placesTO.setProvinceId(jsonObject.get("province_id").toString());
-                                placesTO.setImgURL(AppConstants.S3_BASE_URL+jsonObject.get("place_name").toString()+".jpg");
-                                searchResultPlaces.add(placesTO);
-                            }
-                            recyclerView.setAdapter(mAdapter);
-                            mAdapter.notifyDataSetChanged();
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("search_text", AppGlobalVars.SEARCH_TEXT);
+        params.put("session_id", AppGlobalVars.SESSION_ID);
+        String url = AppConstants.SEARCH_URL;
+        JSONObject parameters = new JSONObject(params);
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, parameters, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("data");
+                    if (null != jsonArray && jsonArray.length() > 0) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            PlacesTO placesTO = new PlacesTO();
+                            placesTO.setPlaceName(jsonObject.get("place_name").toString());
+                            placesTO.setPlaceId(jsonObject.get("place_id").toString());
+                            placesTO.setPlaceDesc(jsonObject.get("desc").toString());
+                            placesTO.setProvinceId(jsonObject.get("province_id").toString());
+                            placesTO.setImgURL(AppConstants.S3_BASE_URL + jsonObject.get("place_name").toString() + ".jpg");
+                            searchResultPlaces.add(placesTO);
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        recyclerView.setAdapter(mAdapter);
+                        mAdapter.notifyDataSetChanged();
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    error.printStackTrace();
-                }
-            });
-            Volley.newRequestQueue(this).add(jsonRequest);
-        }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        Volley.newRequestQueue(this).add(jsonRequest);
+    }
 }

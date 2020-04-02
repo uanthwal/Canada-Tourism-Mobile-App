@@ -24,12 +24,12 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class RegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class RegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private static final String TAG ="RegisterActivity";
+    private static final String TAG = "RegisterActivity";
     EditText etName, etEmail, etPassword, etConfirmPassword, etContact;
     Button btnRegister;
-    String gender="";
+    String gender = "";
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
@@ -50,7 +50,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
         });
 
         //Gender drop down dynamic values addition
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.gender_options, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender_options, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
@@ -58,41 +58,36 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
      * Method to handle registration of the user.
      */
     private void registerUser() {
-        final String email =etEmail.getText().toString();
-        final String name= etName.getText().toString();
+        final String email = etEmail.getText().toString();
+        final String name = etName.getText().toString();
         final String password = etPassword.getText().toString();
         String confirm = etConfirmPassword.getText().toString();
         final String contact = etContact.getText().toString();
-        if(email.isEmpty() || name.isEmpty() || password.isEmpty() || confirm.isEmpty() || contact.isEmpty())
-        {
-            Toast.makeText(getApplicationContext(),"Please fill in all the details!", Toast.LENGTH_LONG).show();
+        if (email.isEmpty() || name.isEmpty() || password.isEmpty() || confirm.isEmpty() || contact.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please fill in all the details!", Toast.LENGTH_LONG).show();
             return;
         }
 
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-        {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             etEmail.setError("Please enter a valid email");
             etEmail.requestFocus();
             return;
         }
 
-        if(password.length()<6 || confirm.length()<6)
-        {
+        if (password.length() < 6 || confirm.length() < 6) {
             etPassword.setError("Passwords should be at least of six characters");
             return;
         }
-        if(!password.equals(confirm))
-        {
+        if (!password.equals(confirm)) {
             etPassword.setError("Passwords should match");
             etConfirmPassword.setError("Passwords should match");
             return;
         }
-        if(contact.length()!=10){
+        if (contact.length() != 10) {
             etContact.setError("Contact must be of 10 digits only!");
             return;
         }
-        if(!contact.matches("[0-9]+"))
-        {
+        if (!contact.matches("[0-9]+")) {
             etContact.setError("Contact shouldn't contain anything other than digits");
             return;
         }
@@ -105,33 +100,31 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("username", name);
         params.put("email", email);
-        params.put("mobile",contact);
-        params.put("password",password);
-        String url = "https://cloud-5409.herokuapp.com/register";
+        params.put("mobile", contact);
+        params.put("password", password);
+        String url = AppConstants.REGISTER_URL;
         JSONObject parameters = new JSONObject(params);
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, parameters, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 //TODO: handle success
-                String rc="", message="";
+                String rc = "", message = "";
                 try {
                     rc = response.getString("code");
                     message = response.getString("message");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if (rc.equals("200"))
-                {
+                if (rc.equals("200")) {
                     AppGlobalVars.USER_NAME = name;
                     Toast.makeText(RegistrationActivity.this, "Registration Successful! ", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "onResponse: "+ "Registration Success.");
+                    Log.d(TAG, "onResponse: " + "Registration Success.");
                     Intent intent = new Intent(RegistrationActivity.this, TwoFactorAuthActivity.class);
                     AppGlobalVars.EMAIL_ID = email;
                     startActivity(intent);
-                }
-                else{
-                    Log.d(TAG, "onResponse: Registration Server failure: "+ message);
-                    Toast.makeText(RegistrationActivity.this, "Server Message: "+message, Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d(TAG, "onResponse: Registration Server failure: " + message);
+                    Toast.makeText(RegistrationActivity.this, "Server Message: " + message, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -140,7 +133,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 //TODO: handle failure
-                Log.e(TAG, "errorResponse:" , error);
+                Log.e(TAG, "errorResponse:", error);
                 Toast.makeText(RegistrationActivity.this, "Registration Failed! Try again.", Toast.LENGTH_SHORT).show();
             }
         });

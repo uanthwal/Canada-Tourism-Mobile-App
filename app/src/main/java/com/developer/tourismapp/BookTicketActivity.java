@@ -60,7 +60,7 @@ public class BookTicketActivity extends AppCompatActivity {
                         BookTicketActivity.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener,
-                        year,month,day);
+                        year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.R.color.transparent));
                 dialog.show();
 
@@ -69,7 +69,7 @@ public class BookTicketActivity extends AppCompatActivity {
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-                month = month+1;
+                month = month + 1;
                 //Log.d(TAG, "onDateSet : mm/dd/yyyy : "+ month + "/" + day + "/"+ year );
                 date = month + "/" + day + "/" + year;
                 mDisplayDate.setText(date);
@@ -77,7 +77,8 @@ public class BookTicketActivity extends AppCompatActivity {
         };
 
     }
-    public void openTravelModes(){
+
+    public void openTravelModes() {
         String source = mySpinner.getSelectedItem().toString();
         String destination = Destination.getText().toString();
         Intent intent = new Intent(BookTicketActivity.this, TravelMode.class);
@@ -86,7 +87,7 @@ public class BookTicketActivity extends AppCompatActivity {
 //        intent.putExtra( "DESTINATION", AppGlobalVars.SEARCH_PLACE_ID);
 //        intent.putExtra("DESTINATION","AULA");
 //        intent.putExtra("TRAVELDATE", date);
-        AppGlobalVars.TRAVEL_DATE =date;
+        AppGlobalVars.TRAVEL_DATE = date;
         startActivity(intent);
     }
 

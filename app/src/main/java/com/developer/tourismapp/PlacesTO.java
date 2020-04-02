@@ -18,6 +18,7 @@ public class PlacesTO {
     public PlacesTO() {
 
     }
+
     public String getPlaceId() {
         return placeId;
     }

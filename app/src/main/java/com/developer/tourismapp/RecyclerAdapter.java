@@ -16,7 +16,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.TextVi
 
     ArrayList<myModel> list = new ArrayList<myModel>();
     Context context;
-    String source, destination,t_date;
+    String source, destination, t_date;
 
     public RecyclerAdapter(ArrayList<myModel> list, Context context, String source, String destination, String t_date) {
         this.list = list;
@@ -29,7 +29,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.TextVi
     @NonNull
     @Override
     public TextViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item1,viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item1, viewGroup, false);
         TextViewHolder textViewHolder = new TextViewHolder(view);
         return textViewHolder;
     }
@@ -47,12 +47,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.TextVi
                 String travel_mode = list.get(i).travel_mode;
                 String mode_number = list.get(i).mode_number;
                 String price_travel = list.get(i).price_travel;
+                String mode_company = list.get(i).mode_company;
+                String mode_id = list.get(i).mode_id;
 
                 Intent i = new Intent(context, CardDetails.class);
                 i.putExtra("TRAVEL_NAME", travel_name);
                 i.putExtra("TRAVEL_MODE", travel_mode);
                 i.putExtra("MODE_NUMBER", mode_number);
                 i.putExtra("PRICE_TRAVEL", price_travel);
+                i.putExtra("MODE_COMPANY", mode_company);
+                i.putExtra("MODE_ID", mode_id);
                 context.startActivity(i);
             }
         });
@@ -63,12 +67,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.TextVi
         return list.size();
     }
 
-    public static class TextViewHolder extends RecyclerView.ViewHolder{
+    public static class TextViewHolder extends RecyclerView.ViewHolder {
         TextView travel_name;
         TextView travel_mode;
         TextView mode_number;
         TextView price_travel;
         Button btnBook;
+
         public TextViewHolder(@NonNull View itemView) {
             super(itemView);
             travel_name = (TextView) itemView.findViewById(R.id.travelName);

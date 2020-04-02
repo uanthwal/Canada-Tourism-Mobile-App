@@ -47,7 +47,7 @@ public class ResultPlaceListAdapter extends RecyclerView.Adapter<ResultPlaceList
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public ResultPlaceListAdapter(Context mContext, ArrayList<PlacesTO> myDataset, OnItemClickListener onItemClickListener) {
-        this.mContext =mContext;
+        this.mContext = mContext;
         mDataset = myDataset;
         mOnItemClickListener = onItemClickListener;
     }
@@ -78,7 +78,7 @@ public class ResultPlaceListAdapter extends RecyclerView.Adapter<ResultPlaceList
                 Log.d(TAG, "onClick:  book ticket click action: " + position);
                 Intent intent = new Intent(mContext, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                AppGlobalVars.SEARCH_PLACE_ID =mDataset.get(position).placeId;
+                AppGlobalVars.SEARCH_PLACE_ID = mDataset.get(position).placeId;
                 mContext.startActivity(intent);
             }
         });

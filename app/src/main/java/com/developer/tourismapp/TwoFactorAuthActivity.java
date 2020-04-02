@@ -33,7 +33,7 @@ public class TwoFactorAuthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2fa);
         tvEmail = findViewById(R.id.tv_email);
-        btnverify =findViewById(R.id.btn_verify);
+        btnverify = findViewById(R.id.btn_verify);
         etOTP = findViewById(R.id.et_otp);
         tvEmail.setText(AppGlobalVars.EMAIL_ID);
 
@@ -41,7 +41,7 @@ public class TwoFactorAuthActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!etOTP.getText().toString().equals(""))
-                validateOTP(tvEmail.getText().toString(), etOTP.getText().toString());
+                    validateOTP(tvEmail.getText().toString(), etOTP.getText().toString());
             }
         });
     }
@@ -50,33 +50,31 @@ public class TwoFactorAuthActivity extends AppCompatActivity {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("email", emailid);
         params.put("otp", otp);
-        String url = "https://cloud-5409.herokuapp.com/verify-otp";
+        String url = AppConstants.VERIFY_OTP;
         JSONObject parameters = new JSONObject(params);
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, parameters, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 //TODO: handle success
-                String rc="", sessionid="", message="";
+                String rc = "", sessionid = "", message = "";
                 try {
                     rc = response.getString("code");
                     sessionid = response.getString("session_id");
                     message = response.getString("message");
-                    JSONObject jsonObject= response.getJSONObject("data");
+                    JSONObject jsonObject = response.getJSONObject("data");
                     AppGlobalVars.USER_NAME = jsonObject.getString("username");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if (rc.equals("200"))
-                {
-                    Log.d(TAG, "onResponse: "+ "Auth Success.");
+                if (rc.equals("200")) {
+                    Log.d(TAG, "onResponse: " + "Auth Success.");
                     Intent intent = new Intent(TwoFactorAuthActivity.this, BookTicketActivity.class);
                     AppGlobalVars.SESSION_ID = sessionid;
                     startActivity(intent);
-                }
-                else{
-                    Log.d(TAG, "onResponse: Auth Server failure "+ message);
-                    Toast.makeText(TwoFactorAuthActivity.this, "Server Message: "+message, Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d(TAG, "onResponse: Auth Server failure " + message);
+                    Toast.makeText(TwoFactorAuthActivity.this, "Server Message: " + message, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -85,7 +83,7 @@ public class TwoFactorAuthActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 //TODO: handle failure
-                Log.e(TAG, "errorResponse:" , error);
+                Log.e(TAG, "errorResponse:", error);
                 Toast.makeText(TwoFactorAuthActivity.this, "Auth Failed! Try again.", Toast.LENGTH_SHORT).show();
             }
         });

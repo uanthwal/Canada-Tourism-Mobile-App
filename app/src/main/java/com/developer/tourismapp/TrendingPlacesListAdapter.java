@@ -70,6 +70,7 @@ public class TrendingPlacesListAdapter extends RecyclerView.Adapter<TrendingPlac
     public float convertDpToPx(Context context, float dp) {
         return dp * context.getResources().getDisplayMetrics().density;
     }
+
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
@@ -78,8 +79,8 @@ public class TrendingPlacesListAdapter extends RecyclerView.Adapter<TrendingPlac
         if (null != mDataset && mDataset.size() > 0) {
             holder.placeName.setText(mDataset.get(position).placeName);
             holder.placeDesc.setText(mDataset.get(position).placeDesc);
-            holder.placeImage.getLayoutParams().height =(int) convertDpToPx(mContext,68);
-            holder.placeImage.getLayoutParams().width =(int) convertDpToPx(mContext,76);
+            holder.placeImage.getLayoutParams().height = (int) convertDpToPx(mContext, 68);
+            holder.placeImage.getLayoutParams().width = (int) convertDpToPx(mContext, 76);
             Picasso.get().load(mDataset.get(position).imgURL).into(holder.placeImage);
         }
         holder.bookButton.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +89,7 @@ public class TrendingPlacesListAdapter extends RecyclerView.Adapter<TrendingPlac
                 Log.d(TAG, "onClick:  book ticket click action: " + position);
                 Intent intent = new Intent(mContext, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                AppGlobalVars.SEARCH_PLACE_ID =mDataset.get(position).placeId;
+                AppGlobalVars.SEARCH_PLACE_ID = mDataset.get(position).placeId;
                 mContext.startActivity(intent);
             }
         });

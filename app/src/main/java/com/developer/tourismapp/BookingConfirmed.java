@@ -25,7 +25,8 @@ public class BookingConfirmed extends AppCompatActivity {
     Button btnHome;
     Button btnSendPDF;
     private static final String TAG = "BookingConfirmed";
-    String travel_name, travel_mode, mode_number, price_travel, source, destination, travel_date, Booking_id;
+    String travel_name, travel_mode, mode_number, price_travel, source, destination, travel_date, Booking_id, mode_company;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,7 @@ public class BookingConfirmed extends AppCompatActivity {
         destination = intent.getStringExtra("DESTINATION");
         travel_date = intent.getStringExtra("TRAVEL_DATE");
         Booking_id = intent.getStringExtra("BOOKING_ID");
+        mode_company = intent.getStringExtra("MODE_COMPANY");
 
         TextView booking_id = (TextView) findViewById(R.id.bookingid);
         booking_id.setText(Booking_id);
@@ -76,28 +78,26 @@ public class BookingConfirmed extends AppCompatActivity {
     private void sendPDFToMail() {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("booking_id", Booking_id);
-        String url = AppConstants.SEND_PDF_URL;
+        String url = AppConstants.GENERATE_TICKET;
         JSONObject parameters = new JSONObject(params);
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, parameters, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 //TODO: handle success
-                String rc="", message="";
+                String rc = "", message = "";
                 try {
-                    rc=response.getString("code");
+                    rc = response.getString("code");
                     message = response.getString("message");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if (rc.equals("200"))
-                {
+                if (rc.equals("200")) {
                     Toast.makeText(BookingConfirmed.this, "Ticket PDF has been sent to your registered mailid!", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "onResponse: "+ "PDF Sending Success.");
+                    Log.d(TAG, "onResponse: " + "PDF Sending Success.");
 
-                }
-                else{
-                    Log.d(TAG, "onResponse: Server failure "+ message);
-                    Toast.makeText(BookingConfirmed.this, "Sending PDF Failure: "+message, Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d(TAG, "onResponse: Server failure " + message);
+                    Toast.makeText(BookingConfirmed.this, "Sending PDF Failure: " + message, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -106,7 +106,7 @@ public class BookingConfirmed extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 //TODO: handle failure
-                Log.e(TAG, "errorResponse:" , error);
+                Log.e(TAG, "errorResponse:", error);
                 Toast.makeText(BookingConfirmed.this, "Sending PDF Failed! Try again.", Toast.LENGTH_SHORT).show();
             }
         });

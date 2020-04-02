@@ -25,7 +25,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvRegister;
     Button btnLogin;
@@ -33,11 +33,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final String TAG = "LoginActivity";
 
     @Override
-    public void onClick(View view)
-    {
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.btn_login:
-                if(checkDetails())
+                if (checkDetails())
                     signIn(etEmail.getText().toString(), etPassword.getText().toString());
                 break;
             case R.id.tv_register:
@@ -45,30 +44,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+
     /**
      * Method to handle login validations.
      */
-    private Boolean checkDetails()
-    {
+    private Boolean checkDetails() {
         String email, password;
-        email=etEmail.getText().toString();
+        email = etEmail.getText().toString();
         password = etPassword.getText().toString();
 
-        if(email.isEmpty() || password.isEmpty())
-        {
-            Toast.makeText(getApplicationContext(),"Please fill in all the details!", Toast.LENGTH_SHORT).show();
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please fill in all the details!", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-        {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             etEmail.setError("Please enter a valid email");
             etEmail.requestFocus();
             return false;
         }
 
-        if(password.length()<6)
-        {
+        if (password.length() < 6) {
             etPassword.setError("Passwords should be at least of six characters");
             return false;
         }
@@ -85,30 +81,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("email", email);
         params.put("password", password);
-        String url = "https://cloud-5409.herokuapp.com/login";
+        String url = AppConstants.LOGIN_URL;
         JSONObject parameters = new JSONObject(params);
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, parameters, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 //TODO: handle success
-                String rc="", message="";
+                String rc = "", message = "";
                 try {
-                    rc=response.getString("code");
+                    rc = response.getString("code");
                     message = response.getString("message");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if (rc.equals("200"))
-                {
+                if (rc.equals("200")) {
                     Toast.makeText(LoginActivity.this, "Transferring to Authentication Screen..", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "onResponse: "+ "Login Success.");
+                    Log.d(TAG, "onResponse: " + "Login Success.");
                     Intent intent = new Intent(LoginActivity.this, TwoFactorAuthActivity.class);
                     AppGlobalVars.EMAIL_ID = email;
                     startActivity(intent);
-                }
-                else{
-                    Log.d(TAG, "onResponse: Server failure "+ message);
-                    Toast.makeText(LoginActivity.this, "Server Message: "+message, Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d(TAG, "onResponse: Server failure " + message);
+                    Toast.makeText(LoginActivity.this, "Server Message: " + message, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -117,7 +111,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 //TODO: handle failure
-                Log.e(TAG, "errorResponse:" , error);
+                Log.e(TAG, "errorResponse:", error);
                 Toast.makeText(LoginActivity.this, "Login Failed! Try again.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -128,9 +122,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        etEmail= (EditText)findViewById(R.id.et_email);
-        etPassword= (EditText)findViewById(R.id.et_password);
-        btnLogin =(Button) findViewById(R.id.btn_login);
+        etEmail = (EditText) findViewById(R.id.et_email);
+        etPassword = (EditText) findViewById(R.id.et_password);
+        btnLogin = (Button) findViewById(R.id.btn_login);
         tvRegister = (TextView) findViewById(R.id.tv_register);
         tvRegister.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
@@ -145,8 +139,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Quit")
                 .setMessage("Are you sure you want quit?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finishAndRemoveTask();

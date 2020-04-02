@@ -6,15 +6,35 @@ public class myModel {
     String mode_number;
     String price_travel;
 
+    public String getMode_id() {
+        return mode_id;
+    }
+
+    public void setMode_id(String mode_id) {
+        this.mode_id = mode_id;
+    }
+
+    public String getMode_company() {
+        return mode_company;
+    }
+
+    public void setMode_company(String mode_company) {
+        this.mode_company = mode_company;
+    }
+
+    String mode_id;
+    String mode_company;
 
     public myModel() {
     }
 
-    public myModel(String travel_name, String travel_mode, String mode_number, String price_travel) {
+    public myModel(String travel_name, String travel_mode, String mode_number, String price_travel, String mode_company, String mode_id) {
         this.travel_name = travel_name;
         this.travel_mode = travel_mode;
         this.mode_number = mode_number;
         this.price_travel = price_travel;
+        this.mode_company = mode_company;
+        this.mode_id = mode_id;
     }
 
     public String getTravel_name() {

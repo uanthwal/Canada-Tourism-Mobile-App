@@ -33,15 +33,9 @@ public class TravelMode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel_mode);
         RequestQueue queue = Volley.newRequestQueue(this);
-        Intent intent = getIntent();
-//        String source = intent.getStringExtra("SOURCE");
-//        String destination = intent.getStringExtra("DESTINATION");
-//        String t_date = intent.getStringExtra("TRAVELDATE");
-
-        final String url = "https://cloud-5409.herokuapp.com/api/modes";
+        final String url = AppConstants.GET_TRAVEL_MODES;
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
-                {
+                new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         // response
@@ -50,7 +44,7 @@ public class TravelMode extends AppCompatActivity {
                             JSONArray jsonArray = jsonObject.getJSONArray("data");
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jo = jsonArray.getJSONObject(i);
-                                myModel m = new myModel(jo.getString("mode_company"), jo.getString("mode"), jo.getString("mode_number"),jo.getString("mode_fare"));
+                                myModel m = new myModel(jo.getString("mode_company"), jo.getString("mode"), jo.getString("mode_number"), jo.getString("mode_fare"), jo.getString("mode_company"), jo.getString("mode_id"));
                                 mList.add(m);
                             }
                             recyclerView.setAdapter(adapter);
@@ -60,10 +54,7 @@ public class TravelMode extends AppCompatActivity {
                         Log.d("Response", response);
                     }
                 },
-                new Response.ErrorListener()
-                {
-
-
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
@@ -73,9 +64,8 @@ public class TravelMode extends AppCompatActivity {
                 }
         ) {
             @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<String, String>();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
                 params.put("src", AppGlobalVars.SOURCE);
                 params.put("dest", AppGlobalVars.SEARCH_PLACE_ID);
                 return params;
@@ -83,7 +73,7 @@ public class TravelMode extends AppCompatActivity {
         };
         queue.add(postRequest);
         recyclerView = findViewById(R.id.myrecycle);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        adapter = new RecyclerAdapter(mList,this, AppGlobalVars.SOURCE, AppGlobalVars.SEARCH_PLACE_ID, AppGlobalVars.TRAVEL_DATE);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        adapter = new RecyclerAdapter(mList, this, AppGlobalVars.SOURCE, AppGlobalVars.SEARCH_PLACE_ID, AppGlobalVars.TRAVEL_DATE);
     }
 }
